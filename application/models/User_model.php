@@ -9,6 +9,7 @@
 
         public function user_list()
         {
+            //dcscsdcs
             $query = $this->db->get_where('user_master', array('is_active' => '1'));
             return $query->result();
         }
