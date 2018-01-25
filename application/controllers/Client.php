@@ -324,5 +324,477 @@
             echo json_encode($res);
         }
 
+        public function trip_type_list(){
+            $benchmarkTimeStar = microtime(1);
+            $triptype = $this->Trip_type_model->trip_type_list();
+            if (count($triptype) > 0) {
+                $res['msg'] = "Success";
+            } else {
+                $res['msg'] = "Sorry!An error Occured";
+            }
+            $res['data'] = $triptype;
+            $benchmarkTimeEnd = microtime(1);
+            $res['timespan'] = round(1000 * ($benchmarkTimeEnd - $benchmarkTimeStar), 4) . "ms";
+            echo json_encode($res);
+        }
+
+        public function insert_trip_type($args = array()){
+            $benchmarkTimeStar = microtime(1);
+            $data = $args;
+            if ($data == null) {
+                $data['trip_type'] = $this->input->get('trip_type');
+            }
+            $triptype = $this->Trip_type_model->insert_trip_type($data);
+            if (count($triptype) > 0) {
+                $res['msg'] = "Successfully Added";
+            } else {
+                $res['msg'] = "Sorry!An error Occured";
+            }
+            $res['data'] = $triptype;
+            $benchmarkTimeEnd = microtime(1);
+            $res['timespan'] = round(1000 * ($benchmarkTimeEnd - $benchmarkTimeStar), 4) . "ms";
+            echo json_encode($res);
+        }
+
+        public function edit_trip_type($args = array()){
+            $benchmarkTimeStar = microtime(1);
+            $data = $args;
+            if ($data == null) {
+                $data['trip_type_id_pk'] = $this->input->get('trip_type_id_pk');
+            }
+            $triptype = $this->Trip_type_model->trip_type_data($data['trip_type_id_pk']);
+            if (count($triptype) > 0) {
+                $res['msg'] = "Success";
+            } else {
+                $res['msg'] = "Sorry!An error Occured";
+            }
+            $res['data'] = $triptype;
+            $benchmarkTimeEnd = microtime(1);
+            $res['timespan'] = round(1000 * ($benchmarkTimeEnd - $benchmarkTimeStar), 4) . "ms";
+            echo json_encode($res);   
+        }
+
+        public function update_trip_type($args = array()){
+            $benchmarkTimeStar = microtime(1);
+            $data = $args;
+            if ($data == null) {
+                $data['trip_type_id_pk'] = $this->input->get('trip_type_id_pk');;
+                $data['trip_type'] = $this->input->get('trip_type');
+            }
+            $triptype = $this->Trip_type_model->update_trip_type($data);
+            if (count($triptype) > 0) {
+                $res['msg'] = "Successfully Updated";
+            } else {
+                $res['msg'] = "Sorry!An error Occured";
+            }
+            $res['data'] = $triptype;
+            $benchmarkTimeEnd = microtime(1);
+            $res['timespan'] = round(1000 * ($benchmarkTimeEnd - $benchmarkTimeStar), 4) . "ms";
+            echo json_encode($res);
+        }
+
+        public function delete_trip_type($args = array()){
+            $benchmarkTimeStar = microtime(1);
+            $data = $args;
+            if ($data == null) {
+                $data['trip_type_id_pk'] = $this->input->get('trip_type_id_pk');
+            }
+            $triptype = $this->Trip_type_model->delete_car($data['trip_type_id_pk']);
+            if (count($triptype) > 0) {
+                $res['msg'] = "Successfully deleted";
+            } else {
+                $res['msg'] = "Sorry!An error Occured";
+            }
+            $res['data'] = $triptype;
+            $benchmarkTimeEnd = microtime(1);
+            $res['timespan'] = round(1000 * ($benchmarkTimeEnd - $benchmarkTimeStar), 4) . "ms";
+            echo json_encode($res);
+        }
+
+        public function sub_trip_type_list(){
+            $benchmarkTimeStar = microtime(1);
+            $subtriptype = $this->Sub_trip_type_model->sub_trip_type_list();
+            if (count($subtriptype) > 0) {
+                $res['msg'] = "Success";
+            } else {
+                $res['msg'] = "Sorry!An error Occured";
+            }
+            $res['data'] = $subtriptype;
+            $benchmarkTimeEnd = microtime(1);
+            $res['timespan'] = round(1000 * ($benchmarkTimeEnd - $benchmarkTimeStar), 4) . "ms";
+            echo json_encode($res);
+        }
+
+        public function insert_sub_trip_type($args = array()){
+            $benchmarkTimeStar = microtime(1);
+            $data = $args;
+            if ($data == null) {
+                $data['name'] = $this->input->get('name');
+                $data['trip_type_id_fk'] = $this->input->get('trip_type_id_fk');
+            }
+            $subtriptype = $this->Sub_trip_type_model->insert_sub_trip_type($data);
+            if (count($subtriptype) > 0) {
+                $res['msg'] = "Successfully Added";
+            } else {
+                $res['msg'] = "Sorry!An error Occured";
+            }
+            $res['data'] = $subtriptype;
+            $benchmarkTimeEnd = microtime(1);
+            $res['timespan'] = round(1000 * ($benchmarkTimeEnd - $benchmarkTimeStar), 4) . "ms";
+            echo json_encode($res);
+        }
+
+        public function edit_sub_trip_type($args = array()){
+            $benchmarkTimeStar = microtime(1);
+            $data = $args;
+            if ($data == null) {
+                $data['sub_trip_type_id_pk'] = $this->input->get('sub_trip_type_id_pk');
+            }
+            $subtriptype = $this->Sub_trip_type_model->sub_trip_type_data($data['sub_trip_type_id_pk']);
+            if (count($subtriptype) > 0) {
+                $res['msg'] = "Success";
+            } else {
+                $res['msg'] = "Sorry!An error Occured";
+            }
+            $res['data'] = $subtriptype;
+            $benchmarkTimeEnd = microtime(1);
+            $res['timespan'] = round(1000 * ($benchmarkTimeEnd - $benchmarkTimeStar), 4) . "ms";
+            echo json_encode($res);
+        }
+
+        public function update_sub_trip_type($args = array()){
+            $benchmarkTimeStar = microtime(1);
+            $data = $args;
+            if ($data == null) {
+                $data['sub_trip_type_id_fk'] = $this->input->get('sub_trip_type_id_fk');
+                $data['name'] = $this->input->get('name');
+                $data['trip_type_id_fk'] = $this->input->get('trip_type_id_fk');
+            }
+            $subtriptype = $this->Sub_trip_type_model->update_sub_trip_type($data);
+            if (count($subtriptype) > 0) {
+                $res['msg'] = "Successfully Updated";
+            } else {
+                $res['msg'] = "Sorry!An error Occured";
+            }
+            $res['data'] = $subtriptype;
+            $benchmarkTimeEnd = microtime(1);
+            $res['timespan'] = round(1000 * ($benchmarkTimeEnd - $benchmarkTimeStar), 4) . "ms";
+            echo json_encode($res);
+        }
+
+        public function delete_sub_trip_type($args = array()){
+            $benchmarkTimeStar = microtime(1);
+            $data = $args;
+            if ($data == null) {
+                $data['sub_trip_type_id_pk'] = $this->input->get('sub_trip_type_id_pk');
+            }
+            $subtriptype = $this->Sub_trip_type_model->delete_sub_trip_type($data['sub_trip_type_id_pk']);
+            if (count($subtriptype) > 0) {
+                $res['msg'] = "Successfully deleted";
+            } else {
+                $res['msg'] = "Sorry!An error Occured";
+            }
+            $res['data'] = $subtriptype;
+            $benchmarkTimeEnd = microtime(1);
+            $res['timespan'] = round(1000 * ($benchmarkTimeEnd - $benchmarkTimeStar), 4) . "ms";
+            echo json_encode($res);
+        }
+
+        public function city_list(){
+            $benchmarkTimeStar = microtime(1);
+            $city = $this->City_model->city_list();
+            if (count($city) > 0) {
+                $res['msg'] = "Success";
+            } else {
+                $res['msg'] = "Sorry!An error Occured";
+            }
+            $res['data'] = $city;
+            $benchmarkTimeEnd = microtime(1);
+            $res['timespan'] = round(1000 * ($benchmarkTimeEnd - $benchmarkTimeStar), 4) . "ms";
+            echo json_encode($res);
+        }
+
+        public function insert_city($args = array()){
+            $benchmarkTimeStar = microtime(1);
+            $data = $args;
+            if ($data == null) {
+                $data['name'] = $this->input->get('name');
+                $data['state_id_fk'] = $this->input->get('state_id_fk');
+                $data['driver_allowance'] = $this->input->get('driver_allowance');
+            }
+            $city = $this->City_model->insert_city($data);
+            if (count($city) > 0) {
+                $res['msg'] = "Successfully Added";
+            } else {
+                $res['msg'] = "Sorry!An error Occured";
+            }
+            $res['data'] = $city;
+            $benchmarkTimeEnd = microtime(1);
+            $res['timespan'] = round(1000 * ($benchmarkTimeEnd - $benchmarkTimeStar), 4) . "ms";
+            echo json_encode($res);
+        }
+
+        public function edit_city($args = array()){
+            $benchmarkTimeStar = microtime(1);
+            $data = $args;
+            if ($data == null) {
+                $data['city_id_pk'] = $this->input->get('city_id_pk');
+            }
+            $city = $this->City_model->city_data($data['city_id_pk']);
+            if (count($city) > 0) {
+                $res['msg'] = "Success";
+            } else {
+                $res['msg'] = "Sorry!An error Occured";
+            }
+            $res['data'] = $city;
+            $benchmarkTimeEnd = microtime(1);
+            $res['timespan'] = round(1000 * ($benchmarkTimeEnd - $benchmarkTimeStar), 4) . "ms";
+            echo json_encode($res);
+        }
+
+        public function update_city($args = array()){
+            $benchmarkTimeStar = microtime(1);
+            $data = $args;
+            if ($data == null) {
+                $data['city_id_pk'] = $this->input->get('city_id_pk');
+                $data['name'] = $this->input->get('name');
+                $data['state_id_fk'] = $this->input->get('state_id_fk');
+                $data['driver_allowance'] = $this->input->get('driver_allowance');
+            }
+            $city = $this->City_model->update_city($data);
+            if (count($city) > 0) {
+                $res['msg'] = "Successfully Updated";
+            } else {
+                $res['msg'] = "Sorry!An error Occured";
+            }
+            $res['data'] = $city;
+            $benchmarkTimeEnd = microtime(1);
+            $res['timespan'] = round(1000 * ($benchmarkTimeEnd - $benchmarkTimeStar), 4) . "ms";
+            echo json_encode($res);
+        }
+
+        public function delete_city($args = array()){
+            $benchmarkTimeStar = microtime(1);
+            $data = $args;
+            if ($data == null) {
+                $data['city_id_pk'] = $this->input->get('city_id_pk');
+            }
+            $city = $this->City_model->delete_city($data['city_id_pk']);
+            if (count($city) > 0) {
+                $res['msg'] = "Successfully deleted";
+            } else {
+                $res['msg'] = "Sorry!An error Occured";
+            }
+            $res['data'] = $city;
+            $benchmarkTimeEnd = microtime(1);
+            $res['timespan'] = round(1000 * ($benchmarkTimeEnd - $benchmarkTimeStar), 4) . "ms";
+            echo json_encode($res);
+        }
+
+        public function state_list(){
+            $benchmarkTimeStar = microtime(1);
+            $state = $this->State_model->state_list();
+            if (count($state) > 0) {
+                $res['msg'] = "Success";
+            } else {
+                $res['msg'] = "Sorry!An error Occured";
+            }
+            $res['data'] = $state;
+            $benchmarkTimeEnd = microtime(1);
+            $res['timespan'] = round(1000 * ($benchmarkTimeEnd - $benchmarkTimeStar), 4) . "ms";
+            echo json_encode($res);
+        }
+
+        public function insert_state($args = array()){
+            $benchmarkTimeStar = microtime(1);
+            $data = $args;
+            if ($data == null) {
+                $data['name'] = $this->input->get('name');
+            }
+            $state = $this->State_model->insert_state($data);
+            if (count($state) > 0) {
+                $res['msg'] = "Successfully Added";
+            } else {
+                $res['msg'] = "Sorry!An error Occured";
+            }
+            $res['data'] = $state;
+            $benchmarkTimeEnd = microtime(1);
+            $res['timespan'] = round(1000 * ($benchmarkTimeEnd - $benchmarkTimeStar), 4) . "ms";
+            echo json_encode($res);
+        }
+
+        public function edit_state($args = array()){
+            $benchmarkTimeStar = microtime(1);
+            $data = $args;
+            if ($data == null) {
+                $data['state_id_pk'] = $this->input->get('state_id_pk');
+            }
+            $state = $this->State_model->state_data($data['state_id_pk']);
+            if (count($state) > 0) {
+                $res['msg'] = "Success";
+            } else {
+                $res['msg'] = "Sorry!An error Occured";
+            }
+            $res['data'] = $state;
+            $benchmarkTimeEnd = microtime(1);
+            $res['timespan'] = round(1000 * ($benchmarkTimeEnd - $benchmarkTimeStar), 4) . "ms";
+            echo json_encode($res);
+        }
+
+        public function update_state($args = array()){
+            $benchmarkTimeStar = microtime(1);
+            $data = $args;
+            if ($data == null) {
+                $data['state_id_pk'] = $this->input->get('state_id_pk');
+                $data['name'] = $this->input->get('name');
+            }
+            $state = $this->State_model->update_state($data);
+            if (count($state) > 0) {
+                $res['msg'] = "Successfully Updated";
+            } else {
+                $res['msg'] = "Sorry!An error Occured";
+            }
+            $res['data'] = $state;
+            $benchmarkTimeEnd = microtime(1);
+            $res['timespan'] = round(1000 * ($benchmarkTimeEnd - $benchmarkTimeStar), 4) . "ms";
+            echo json_encode($res);
+        }
+
+        public function delete_state($args = array()){
+            $benchmarkTimeStar = microtime(1);
+            $data = $args;
+            if ($data == null) {
+                $data['state_id_pk'] = $this->input->get('state_id_pk');
+            }
+            $state = $this->State_model->delete_state($data['state_id_pk']);
+            if (count($state) > 0) {
+                $res['msg'] = "Successfully deleted";
+            } else {
+                $res['msg'] = "Sorry!An error Occured";
+            }
+            $res['data'] = $state;
+            $benchmarkTimeEnd = microtime(1);
+            $res['timespan'] = round(1000 * ($benchmarkTimeEnd - $benchmarkTimeStar), 4) . "ms";
+            echo json_encode($res);
+        }
+
+        public function trip_list(){
+            $benchmarkTimeStar = microtime(1);
+            $trip = $this->Trip_model->trip_list();
+            if (count($trip) > 0) {
+                $res['msg'] = "Success";
+            } else {
+                $res['msg'] = "Sorry!An error Occured";
+            }
+            $res['data'] = $trip;
+            $benchmarkTimeEnd = microtime(1);
+            $res['timespan'] = round(1000 * ($benchmarkTimeEnd - $benchmarkTimeStar), 4) . "ms";
+            echo json_encode($res);
+        }
+
+        public function insert_trip($args = array()){
+            $benchmarkTimeStar = microtime(1);
+            $data = $args;
+            if ($data == null) {
+                $data['sub_trip_type_id_fk'] = $this->input->get('sub_trip_type_id_fk');
+                $data['days'] = $this->input->get('days');
+                $data['date'] = $this->input->get('date');
+                $data['time'] = $this->input->get('time');
+                $data['source_city'] = $this->input->get('source_city');
+                $data['destination_city'] = $this->input->get('destination_city');
+                $data['car_id_fk'] = $this->input->get('car_id_fk');
+                $data['traveller_name'] = $this->input->get('traveller_name');
+                $data['traveller_contact_no'] = $this->input->get('traveller_contact_no');
+                $data['traveller_email'] = $this->input->get('traveller_email');
+                $data['traveller_pick_up_address'] = $this->input->get('traveller_pick_up_address');
+                $data['driver_id_fk'] = $this->input->get('driver_id_fk');
+                $data['car_no'] = $this->input->get('car_no');
+                $data['is_approved'] = $this->input->get('is_approved');
+                $data['company_id_fk'] = $this->input->get('company_id_fk');
+                $data['reason'] = $this->input->get('reason');
+                $data['traveller_drop_location'] = $this->input->get('traveller_drop_location');
+            }
+            $trip = $this->Trip_model->insert_trip($data);
+            if (count($trip) > 0) {
+                $res['msg'] = "Successfully Added";
+            } else {
+                $res['msg'] = "Sorry!An error Occured";
+            }
+            $res['data'] = $trip;
+            $benchmarkTimeEnd = microtime(1);
+            $res['timespan'] = round(1000 * ($benchmarkTimeEnd - $benchmarkTimeStar), 4) . "ms";
+            echo json_encode($res);
+        }
+
+        public function edit_trip($args = array()){
+            $benchmarkTimeStar = microtime(1);
+            $data = $args;
+            if ($data == null) {
+                $data['trip_id_pk'] = $this->input->get('trip_id_pk');
+            }
+            $trip = $this->Trip_model->trip_data($data['trip_id_pk']);
+            if (count($trip) > 0) {
+                $res['msg'] = "Success";
+            } else {
+                $res['msg'] = "Sorry!An error Occured";
+            }
+            $res['data'] = $trip;
+            $benchmarkTimeEnd = microtime(1);
+            $res['timespan'] = round(1000 * ($benchmarkTimeEnd - $benchmarkTimeStar), 4) . "ms";
+            echo json_encode($res);   
+        }
+
+        public function update_trip($args = array()){
+            $benchmarkTimeStar = microtime(1);
+            $data = $args;
+            if ($data == null) {
+                $data['trip_id_pk'] = $this->input->get('trip_id_pk');
+                $data['sub_trip_type_id_fk'] = $this->input->get('sub_trip_type_id_fk');
+                $data['days'] = $this->input->get('days');
+                $data['date'] = $this->input->get('date');
+                $data['time'] = $this->input->get('time');
+                $data['source_city'] = $this->input->get('source_city');
+                $data['destination_city'] = $this->input->get('destination_city');
+                $data['car_id_fk'] = $this->input->get('car_id_fk');
+                $data['traveller_name'] = $this->input->get('traveller_name');
+                $data['traveller_contact_no'] = $this->input->get('traveller_contact_no');
+                $data['traveller_email'] = $this->input->get('traveller_email');
+                $data['traveller_pick_up_address'] = $this->input->get('traveller_pick_up_address');
+                $data['driver_id_fk'] = $this->input->get('driver_id_fk');
+                $data['car_no'] = $this->input->get('car_no');
+                $data['is_approved'] = $this->input->get('is_approved');
+                $data['company_id_fk'] = $this->input->get('company_id_fk');
+                $data['reason'] = $this->input->get('reason');
+                $data['traveller_drop_location'] = $this->input->get('traveller_drop_location');
+            }
+            $trip = $this->Trip_model->update_trip($data);
+            if (count($trip) > 0) {
+                $res['msg'] = "Successfully Updated";
+            } else {
+                $res['msg'] = "Sorry!An error Occured";
+            }
+            $res['data'] = $trip;
+            $benchmarkTimeEnd = microtime(1);
+            $res['timespan'] = round(1000 * ($benchmarkTimeEnd - $benchmarkTimeStar), 4) . "ms";
+            echo json_encode($res);
+        }
+
+        public function delete_trip($args = array()){
+            $benchmarkTimeStar = microtime(1);
+            $data = $args;
+            if ($data == null) {
+                $data['trip_id_pk'] = $this->input->get('trip_id_pk');
+            }
+            $trip = $this->Trip_model->delete_trip($data['trip_id_pk']);
+            if (count($trip) > 0) {
+                $res['msg'] = "Successfully deleted";
+            } else {
+                $res['msg'] = "Sorry!An error Occured";
+            }
+            $res['data'] = $trip;
+            $benchmarkTimeEnd = microtime(1);
+            $res['timespan'] = round(1000 * ($benchmarkTimeEnd - $benchmarkTimeStar), 4) . "ms";
+            echo json_encode($res);
+        }
     }
 ?>
