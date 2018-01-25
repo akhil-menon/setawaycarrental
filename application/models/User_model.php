@@ -14,10 +14,10 @@
             return $query->result();
         }
 
-        public function user_data($user_id_pk,$user_type)
+        public function user_data($user_id_pk)
         {
-            $query = $this->db->get_where('user_master',array('is_active' => '1', 'user_id_pk' => $user_id_pk, 'user_type' => $user_type));
-            return $query->array();
+            $query = $this->db->get_where('user_master',array('is_active' => '1', 'user_id_pk' => $user_id_pk));
+            return $query->result();
         }
 
         //Insert User
@@ -29,11 +29,12 @@
             $data1['address'] = $data['address'];
             $data1['email'] = $data['email'];
             $data1['contact_no'] = $data['contact_no'];
-
+            
             $this->db->insert('user_master', $data1);
             $user_id_fk = $this->db->insert_id();
-            
-            return $this->db->insert('authentication_master',array('password'=>$data['password']));
+    
+
+            return $this->db->insert('authenticate_master',array('user_id_fk'=>$user_id_fk,'password'=>$data['password']));
         }
 
         //Delete User
@@ -60,6 +61,12 @@
             $user_id_fk = $user_id_pk[0]->{'user_id_pk'};
             $query = $this->db->get_where('authenticate_master',array('is_active' => 1, 'user_id_fk' => $user_id_fk, 'password' => $password));
             return $query->row_array();
+        }
+
+        public function resetpassword($id, $data) {
+            $this->db->where('user_id_pk', $id);
+            $this->db->set('modified_on', 'NOW()', FALSE);
+            return $this->db->update('authenticate_master', array('password'=>$data));
         }
     }
 ?>

@@ -4,9 +4,20 @@
             parent::__construct();
             header('Content-Type: application/json');
             $this->load->model('User_model');
+            $this->load->model('Company_model');
+            $this->load->model('Car_model');
+            $this->load->model('City_model');
+            $this->load->model('Extracharge_model');
+            $this->load->model('Local_Transfer_price_model');
+            $this->load->model('Logsheet_model');
+            $this->load->model('Outstation_price_model');
+            $this->load->model('State_model');
+            $this->load->model('Sub_trip_type_model');
+            $this->load->model('Trip_model');
+            $this->load->model('Trip_type_model');
         }
 
-        public function dologin($args = array()){
+        public function user_login($args = array()){
             $benchmarkTimeStar = microtime(1);
             $data = $args;
             if ($data == null) {
@@ -37,8 +48,6 @@
                 $data['contact_no'] = $this->input->get('contact_no');
                 $data['password'] = $this->input->get('password');
             }
-            print_r($data);
-            die;
             $user = $this->User_model->insert_user($data);
             if (count($user) > 0) {
                 $res['msg'] = "Successfully Added";
@@ -50,5 +59,270 @@
             $res['timespan'] = round(1000 * ($benchmarkTimeEnd - $benchmarkTimeStar), 4) . "ms";
             echo json_encode($res);
         }
+
+        public function forget_password($args = array()){
+            $benchmarkTimeStar = microtime(1);
+            $data = $args;
+            if ($data == null) {
+                $data['user_id_pk'] = $this->input->get('user_id_pk');
+            }
+            $user = $this->User_model->user_data($data['user_id_pk']);
+            if (count($user) > 0) {
+                $res['msg'] = "Success";
+            } else {
+                $res['msg'] = "Sorry!An error Occured";
+            }
+            $res['data'] = $user;
+            $benchmarkTimeEnd = microtime(1);
+            $res['timespan'] = round(1000 * ($benchmarkTimeEnd - $benchmarkTimeStar), 4) . "ms";
+            echo json_encode($user[0]->{'email'});
+        }
+
+        public function reset_password($args = array()) {
+            $benchmarkTimeStar = microtime(1);
+            $data = $args;
+            if ($data == null) {
+                $data['user_id_pk'] = $this->input->post('user_id_pk');
+                $data['password'] = $this->input->post('password');
+            }
+    
+            $user = $this->user_model->resetpassword($data['user_id_pk'], $data['password']);
+            if (count($user) > 0) {
+                $res['msg'] = "Password Changed";
+            }
+            $res['data'] = $user;
+            $benchmarkTimeEnd = microtime(1);
+            $res['timespan'] = round(1000 * ($benchmarkTimeEnd - $benchmarkTimeStar), 4) . "ms";
+            echo json_encode($user);
+        }
+
+        public function edit_user($args = array()){
+            $benchmarkTimeStar = microtime(1);
+            $data = $args;
+            if ($data == null) {
+                $data['user_id_pk'] = $this->input->get('user_id_pk');
+            }
+            $user = $this->User_model->user_data($data['user_id_pk']);
+            if (count($user) > 0) {
+                $res['msg'] = "Success";
+            } else {
+                $res['msg'] = "Sorry!An error Occured";
+            }
+            $res['data'] = $user;
+            $benchmarkTimeEnd = microtime(1);
+            $res['timespan'] = round(1000 * ($benchmarkTimeEnd - $benchmarkTimeStar), 4) . "ms";
+            echo json_encode($res);
+        }
+
+        public function update_user($args = array()){
+            $benchmarkTimeStar = microtime(1);
+            $data = $args;
+            if ($data == null) {
+                $data['user_id_pk'] = $this->input->get('user_id_pk');
+                $data['name'] = $this->input->get('name');
+                $data['user_type'] = $this->input->get('user_type');
+                $data['company_id_fk'] = $this->input->get('company_id_fk');
+                $data['address'] = $this->input->get('address');
+                $data['email'] = $this->input->get('email');
+                $data['contact_no'] = $this->input->get('contact_no');
+            }
+            $user = $this->User_model->update_user($data);
+            if (count($user) > 0) {
+                $res['msg'] = "Successfully Updated";
+            } else {
+                $res['msg'] = "Sorry!An error Occured";
+            }
+            $res['data'] = $user;
+            $benchmarkTimeEnd = microtime(1);
+            $res['timespan'] = round(1000 * ($benchmarkTimeEnd - $benchmarkTimeStar), 4) . "ms";
+            echo json_encode($res);
+        }
+
+        public function company_list(){
+            $benchmarkTimeStar = microtime(1);
+            $company = $this->Company_model->company_list();
+            if (count($company) > 0) {
+                $res['msg'] = "Success";
+            } else {
+                $res['msg'] = "Sorry!An error Occured";
+            }
+            $res['data'] = $company;
+            $benchmarkTimeEnd = microtime(1);
+            $res['timespan'] = round(1000 * ($benchmarkTimeEnd - $benchmarkTimeStar), 4) . "ms";
+            echo json_encode($res);
+        }
+
+        public function insert_company($args = array()){
+            $benchmarkTimeStar = microtime(1);
+            $data = $args;
+            if ($data == null) {
+                $data['name'] = $this->input->get('name');
+                $data['address'] = $this->input->get('address');
+                $data['email'] = $this->input->get('email');
+                $data['description'] = $this->input->get('description');
+                $data['contact_no'] = $this->input->get('contact_no');
+            }
+            $company = $this->Company_model->insert_company($data);
+            if (count($company) > 0) {
+                $res['msg'] = "Successfully Added";
+            } else {
+                $res['msg'] = "Sorry!An error Occured";
+            }
+            $res['data'] = $company;
+            $benchmarkTimeEnd = microtime(1);
+            $res['timespan'] = round(1000 * ($benchmarkTimeEnd - $benchmarkTimeStar), 4) . "ms";
+            echo json_encode($res);
+        }
+
+        public function edit_company($args = array()){
+            $benchmarkTimeStar = microtime(1);
+            $data = $args;
+            if ($data == null) {
+                $data['company_id_pk'] = $this->input->get('company_id_pk');
+            }
+            $company = $this->User_model->company_data($data['company_id_pk']);
+            if (count($company) > 0) {
+                $res['msg'] = "Success";
+            } else {
+                $res['msg'] = "Sorry!An error Occured";
+            }
+            $res['data'] = $company;
+            $benchmarkTimeEnd = microtime(1);
+            $res['timespan'] = round(1000 * ($benchmarkTimeEnd - $benchmarkTimeStar), 4) . "ms";
+            echo json_encode($res);
+        }
+
+        public function update_company($args = array()){
+            $benchmarkTimeStar = microtime(1);
+            $data = $args;
+            if ($data == null) {
+                $data['company_id_pk'] = $this->input->get('company_id_pk');
+                $data['name'] = $this->input->get('name');
+                $data['address'] = $this->input->get('address');
+                $data['email'] = $this->input->get('email');
+                $data['description'] = $this->input->get('description');
+                $data['contact_no'] = $this->input->get('contact_no');
+            }
+            $company = $this->Company_model->update_company($data);
+            if (count($company) > 0) {
+                $res['msg'] = "Successfully updated";
+            } else {
+                $res['msg'] = "Sorry!An error Occured";
+            }
+            $res['data'] = $company;
+            $benchmarkTimeEnd = microtime(1);
+            $res['timespan'] = round(1000 * ($benchmarkTimeEnd - $benchmarkTimeStar), 4) . "ms";
+            echo json_encode($res);   
+        }
+
+        public function delete_company($args = array()){
+            $benchmarkTimeStar = microtime(1);
+            $data = $args;
+            if ($data == null) {
+                $data['company_id_pk'] = $this->input->get('company_id_pk');
+            }
+            $company = $this->Company_model->delete_company($data['company_id_pk']);
+            if (count($company) > 0) {
+                $res['msg'] = "Successfully deleted";
+            } else {
+                $res['msg'] = "Sorry!An error Occured";
+            }
+            $res['data'] = $company;
+            $benchmarkTimeEnd = microtime(1);
+            $res['timespan'] = round(1000 * ($benchmarkTimeEnd - $benchmarkTimeStar), 4) . "ms";
+            echo json_encode($res);
+        }
+        
+        public function car_list(){
+            $benchmarkTimeStar = microtime(1);
+            $car = $this->Car_model->car_list();
+            if (count($car) > 0) {
+                $res['msg'] = "Success";
+            } else {
+                $res['msg'] = "Sorry!An error Occured";
+            }
+            $res['data'] = $car;
+            $benchmarkTimeEnd = microtime(1);
+            $res['timespan'] = round(1000 * ($benchmarkTimeEnd - $benchmarkTimeStar), 4) . "ms";
+            echo json_encode($res);
+        }
+
+        public function insert_car($args = array()){
+            $benchmarkTimeStar = microtime(1);
+            $data = $args;
+            if ($data == null) {
+                $data['name'] = $this->input->get('name');
+                $data['car_type'] = $this->input->get('car_type');
+                $data['seating_capacity'] = $this->input->get('seating_capacity');
+            }
+            $car = $this->Car_model->insert_car($data);
+            if (count($car) > 0) {
+                $res['msg'] = "Successfully Added";
+            } else {
+                $res['msg'] = "Sorry!An error Occured";
+            }
+            $res['data'] = $car;
+            $benchmarkTimeEnd = microtime(1);
+            $res['timespan'] = round(1000 * ($benchmarkTimeEnd - $benchmarkTimeStar), 4) . "ms";
+            echo json_encode($res);
+        }
+
+        public function edit_car($args = array()){
+            $benchmarkTimeStar = microtime(1);
+            $data = $args;
+            if ($data == null) {
+                $data['car_id_pk'] = $this->input->get('car_id_pk');
+            }
+            $car = $this->User_model->car_data($data['car_id_pk']);
+            if (count($car) > 0) {
+                $res['msg'] = "Success";
+            } else {
+                $res['msg'] = "Sorry!An error Occured";
+            }
+            $res['data'] = $car;
+            $benchmarkTimeEnd = microtime(1);
+            $res['timespan'] = round(1000 * ($benchmarkTimeEnd - $benchmarkTimeStar), 4) . "ms";
+            echo json_encode($res);
+        }
+
+        public function update_car($args = array()){
+            $benchmarkTimeStar = microtime(1);
+            $data = $args;
+            if ($data == null) {
+                $data['car_id_pk'] = $this->input->get('car_id_pk');
+                $data['name'] = $this->input->get('name');
+                $data['car_type'] = $this->input->get('car_type');
+                $data['seating_capacity'] = $this->input->get('seating_capacity');
+            }
+            $car = $this->Car_model->update_company($data);
+            if (count($car) > 0) {
+                $res['msg'] = "Successfully updated";
+            } else {
+                $res['msg'] = "Sorry!An error Occured";
+            }
+            $res['data'] = $car;
+            $benchmarkTimeEnd = microtime(1);
+            $res['timespan'] = round(1000 * ($benchmarkTimeEnd - $benchmarkTimeStar), 4) . "ms";
+            echo json_encode($res);   
+        }
+
+        public function delete_car($args = array()){
+            $benchmarkTimeStar = microtime(1);
+            $data = $args;
+            if ($data == null) {
+                $data['car_id_pk'] = $this->input->get('car_id_pk');
+            }
+            $car = $this->Car_model->delete_car($data['car_id_pk']);
+            if (count($car) > 0) {
+                $res['msg'] = "Successfully deleted";
+            } else {
+                $res['msg'] = "Sorry!An error Occured";
+            }
+            $res['data'] = $car;
+            $benchmarkTimeEnd = microtime(1);
+            $res['timespan'] = round(1000 * ($benchmarkTimeEnd - $benchmarkTimeStar), 4) . "ms";
+            echo json_encode($res);
+        }
+
     }
 ?>
