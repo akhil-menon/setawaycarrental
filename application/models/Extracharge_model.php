@@ -9,6 +9,12 @@
             return $this->db->get_where('extracharge_master',array('is_active'=>'1'));
         }
 
+        public function extracharge_data($extra_charge_id_pk)
+        {
+            $query = $this->db->get_where('extracharge_master',array('is_active' => '1', 'extra_charge_id_pk' => $extra_charge_id_pk));
+            return $query->array();
+        }
+
         public function insert_extracharge($data){
             return $this->db->insert('extracharge_master',$data);
         }

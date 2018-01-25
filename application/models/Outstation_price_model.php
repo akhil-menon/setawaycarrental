@@ -9,6 +9,12 @@
             return $this->db->get_where('outstation_price_master',array('is_active'=>'1'));
         }
 
+        public function outstation_price_data($outstation_price_id_pk)
+        {
+            $query = $this->db->get_where('outstation_price_master',array('is_active' => '1', 'outstation_price_id_pk' => $outstation_price_id_pk));
+            return $query->array();
+        }
+
         public function insert_outstation_price($data){
             return $this->db->insert('outstation_price_master',$data);
         }

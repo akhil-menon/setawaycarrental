@@ -9,6 +9,12 @@
             return $this->db->get_where('local_transfer_price_master',array('is_active'=>'1'));
         }
 
+        public function local_transfer_price_data($local_transfer_id_pk)
+        {
+            $query = $this->db->get_where('local_transfer_price_master',array('is_active' => '1', 'local_transfer_id_pk' => $local_transfer_id_pk));
+            return $query->array();
+        }
+
         public function insert_local_transfer_price($data){
             return $this->db->insert('local_transfer_price_master',$data);
         }

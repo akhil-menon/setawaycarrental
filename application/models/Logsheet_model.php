@@ -9,6 +9,13 @@
             return $this->db->get_where('logsheet_master',array('is_active'=>'1'));
         }
 
+        
+        public function logsheet_data($logsheet_id_pk)
+        {
+            $query = $this->db->get_where('logsheet_master',array('is_active' => '1', 'logsheet_id_pk' => $logsheet_id_pk));
+            return $query->array();
+        }
+
         public function insert_logsheet($data){
             return $this->db->insert('logsheet_master',$data);
         }

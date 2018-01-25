@@ -9,6 +9,12 @@
             return $this->db->get_where('state_master',array('is_active'=>'1'));
         }
 
+        public function state_data($state_id_pk)
+        {
+            $query = $this->db->get_where('state_master',array('is_active' => '1', 'state_id_pk' => $state_id_pk));
+            return $query->array();
+        }
+
         public function insert_state($data){
             return $this->db->insert('state_master',$data);
         }
