@@ -35,8 +35,10 @@
                 $data['address'] = $this->input->get('address');
                 $data['email'] = $this->input->get('email');
                 $data['contact_no'] = $this->input->get('contact_no');
-                // $data['password'] = $this->input->get('password');
+                $data['password'] = $this->input->get('password');
             }
+            print_r($data);
+            die;
             $user = $this->User_model->insert_user($data);
             if (count($user) > 0) {
                 $res['msg'] = "Successfully Added";
