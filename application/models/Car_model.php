@@ -9,6 +9,12 @@
             return $this->db->get_where('car_master',array('is_active'=>'1'));
         }
 
+        public function car_data($car_id_pk)
+        {
+            $query = $this->db->get_where('car_master',array('is_active' => '1', 'car_id_pk' => $car_id_pk));
+            return $query->array();
+        }
+
         public function insert_car($data){
             return $this->db->insert('car_master',$data);
         }

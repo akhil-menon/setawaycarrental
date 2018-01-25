@@ -9,6 +9,12 @@
             return $this->db->get_where('trip_type_master',array('is_active'=>'1'));
         }
 
+        public function trip_type_data($trip_type_id_pk)
+        {
+            $query = $this->db->get_where('trip_type_master',array('is_active' => '1', 'trip_type_id_pk' => $trip_type_id_pk));
+            return $query->array();
+        }
+
         public function insert_trip_type($data){
             return $this->db->insert('trip_type_master',$data);
         }

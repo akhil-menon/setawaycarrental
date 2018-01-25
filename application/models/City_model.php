@@ -9,6 +9,12 @@
             return $this->db->get_where('city_master',array('is_active'=>'1'));
         }
 
+        public function city_data($city_id_pk)
+        {
+            $query = $this->db->get_where('city_master',array('is_active' => '1', 'city_id_pk' => $city_id_pk));
+            return $query->array();
+        }
+
         public function insert_city($data){
             return $this->db->insert('city_master',$data);
         }

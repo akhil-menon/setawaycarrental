@@ -9,6 +9,12 @@
             return $this->db->get_where('trip_master',array('is_active'=>'1'));
         }
 
+        public function trip_data($trip_id_pk)
+        {
+            $query = $this->db->get_where('trip_master',array('is_active' => '1', 'trip_id_pk' => $trip_id_pk));
+            return $query->array();
+        }
+
         public function insert_trip($data){
             return $this->db->insert('trip_master',$data);
         }
