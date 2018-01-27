@@ -442,7 +442,7 @@
             $benchmarkTimeStar = microtime(1);
             $data = $args;
             if ($data == null) {
-                $data['sub_trip_type_id_fk'] = $this->input->get('sub_trip_type_id_fk');
+                $data['sub_trip_type_id_pk'] = $this->input->get('sub_trip_type_id_pk');
                 $data['name'] = $this->input->get('name');
                 $data['trip_type_id_fk'] = $this->input->get('trip_type_id_fk');
             }
