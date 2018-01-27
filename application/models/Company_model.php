@@ -9,7 +9,7 @@
             return $this->db->get_where('company_master',array('is_active'=>'1'))->result();
         }
 
-        public function comany_data($company_id_pk)
+        public function company_data($company_id_pk)
         {
             $query = $this->db->get_where('company_master',array('is_active' => '1', 'company_id_pk' => $company_id_pk));
             return $query->result();

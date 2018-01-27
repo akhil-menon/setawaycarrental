@@ -6,13 +6,13 @@
         }
 
         public function car_list(){
-            return $this->db->get_where('car_master',array('is_active'=>'1'));
+            return $this->db->get_where('car_master',array('is_active'=>'1'))->result();
         }
 
         public function car_data($car_id_pk)
         {
             $query = $this->db->get_where('car_master',array('is_active' => '1', 'car_id_pk' => $car_id_pk));
-            return $query->array();
+            return $query->result();
         }
 
         public function insert_car($data){
@@ -23,13 +23,13 @@
             $this->db->where('car_id_pk',$id);
             $this->db->set('is_active','0');
             $this->db->set('modified_on','NOW()',FALSE);
-            $this->db->update('car_master');
+            return $this->db->update('car_master');
         }
 
         public function update_car($data){
             $this->db->where('car_id_pk',$data['car_id_pk']);
             $this->db->set('modified_on','NOW()',FALSE);
-            $this->db->update('car_master',$data);
+            return $this->db->update('car_master',$data);
         }
     }
 ?>

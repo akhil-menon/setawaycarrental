@@ -6,13 +6,13 @@
         }
 
         public function trip_list(){
-            return $this->db->get_where('trip_master',array('is_active'=>'1'));
+            return $this->db->get_where('trip_master',array('is_active'=>'1'))->result();
         }
 
         public function trip_data($trip_id_pk)
         {
             $query = $this->db->get_where('trip_master',array('is_active' => '1', 'trip_id_pk' => $trip_id_pk));
-            return $query->array();
+            return $query->result();
         }
 
         public function insert_trip($data){
@@ -23,13 +23,13 @@
             $this->db->where('trip_id_pk',$id);
             $this->db->set('is_active','0');
             $this->db->set('modified_on','NOW()',FALSE);
-            $this->db->update('trip_master');
+            return $this->db->update('trip_master');
         }
 
         public function update_trip($data){
             $this->db->where('trip_id_pk',$data['trip_id_pk']);
             $this->db->set('modified_on','NOW()',FALSE);
-            $this->db->update('trip_master',$data);
+            return $this->db->update('trip_master',$data);
         }
     }
 ?>

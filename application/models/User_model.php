@@ -64,7 +64,7 @@
         }
 
         public function resetpassword($id, $data) {
-            $this->db->where('user_id_pk', $id);
+            $this->db->where('user_id_fk', $id);
             $this->db->set('modified_on', 'NOW()', FALSE);
             return $this->db->update('authenticate_master', array('password'=>$data));
         }

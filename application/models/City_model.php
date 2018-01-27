@@ -6,13 +6,13 @@
         }
 
         public function city_list(){
-            return $this->db->get_where('city_master',array('is_active'=>'1'));
+            return $this->db->get_where('city_master',array('is_active'=>'1'))->result();
         }
 
         public function city_data($city_id_pk)
         {
             $query = $this->db->get_where('city_master',array('is_active' => '1', 'city_id_pk' => $city_id_pk));
-            return $query->array();
+            return $query->result();
         }
 
         public function insert_city($data){
@@ -23,13 +23,13 @@
             $this->db->where('city_id_pk',$id);
             $this->db->set('is_active','0');
             $this->db->set('modified_on','NOW()',FALSE);
-            $this->db->update('city_master');
+            return $this->db->update('city_master');
         }
 
         public function update_city($data){
             $this->db->where('city_id_pk',$data['city_id_pk']);
             $this->db->set('modified_on','NOW()',FALSE);
-            $this->db->update('city_master',$data);
+            return $this->db->update('city_master',$data);
         }
     }
 ?>

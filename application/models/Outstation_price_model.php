@@ -6,13 +6,13 @@
         }
 
         public function outstation_price_list(){
-            return $this->db->get_where('outstation_price_master',array('is_active'=>'1'));
+            return $this->db->get_where('outstation_price_master',array('is_active'=>'1'))->result();
         }
 
         public function outstation_price_data($outstation_price_id_pk)
         {
             $query = $this->db->get_where('outstation_price_master',array('is_active' => '1', 'outstation_price_id_pk' => $outstation_price_id_pk));
-            return $query->array();
+            return $query->result();
         }
 
         public function insert_outstation_price($data){
@@ -23,13 +23,13 @@
             $this->db->where('outstation_price_id_pk',$id);
             $this->db->set('is_active','0');
             $this->db->set('modified_on','NOW()',FALSE);
-            $this->db->update('outstation_price_master');
+            return $this->db->update('outstation_price_master');
         }
 
         public function update_outstation_price($data){
             $this->db->where('outstation_price_id_pk',$data['outstation_price_id_pk']);
             $this->db->set('modified_on','NOW()',FALSE);
-            $this->db->update('outstation_price_master',$data);
+            return $this->db->update('outstation_price_master',$data);
         }
     }
 ?>

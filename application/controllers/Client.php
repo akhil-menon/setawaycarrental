@@ -82,7 +82,7 @@
                 $data['password'] = $this->input->post('password');
             }
     
-            $user = $this->user_model->resetpassword($data['user_id_pk'], $data['password']);
+            $user = $this->User_model->resetpassword($data['user_id_pk'], $data['password']);
             if (count($user) > 0) {
                 $res['msg'] = "Password Changed";
             }
@@ -171,7 +171,7 @@
             if ($data == null) {
                 $data['company_id_pk'] = $this->input->get('company_id_pk');
             }
-            $company = $this->User_model->company_data($data['company_id_pk']);
+            $company = $this->Company_model->company_data($data['company_id_pk']);
             if (count($company) > 0) {
                 $res['msg'] = "Success";
             } else {
@@ -260,7 +260,7 @@
             if ($data == null) {
                 $data['car_id_pk'] = $this->input->get('car_id_pk');
             }
-            $car = $this->User_model->car_data($data['car_id_pk']);
+            $car = $this->Car_model->car_data($data['car_id_pk']);
             if (count($car) > 0) {
                 $res['msg'] = "Success";
             } else {
@@ -280,7 +280,7 @@
                 $data['car_type'] = $this->input->get('car_type');
                 $data['seating_capacity'] = $this->input->get('seating_capacity');
             }
-            $car = $this->Car_model->update_company($data);
+            $car = $this->Car_model->update_car($data);
             if (count($car) > 0) {
                 $res['msg'] = "Successfully updated";
             } else {
@@ -379,7 +379,7 @@
             if ($data == null) {
                 $data['trip_type_id_pk'] = $this->input->get('trip_type_id_pk');
             }
-            $triptype = $this->Trip_type_model->delete_car($data['trip_type_id_pk']);
+            $triptype = $this->Trip_type_model->delete_trip_type($data['trip_type_id_pk']);
             if (count($triptype) > 0) {
                 $res['msg'] = "Successfully deleted";
             } else {
