@@ -756,7 +756,6 @@
             $res['timespan'] = round(1000 * ($benchmarkTimeEnd - $benchmarkTimeStar), 4) . "ms";
             echo json_encode($res);
         }
-
         public function insert_logsheet($args = array()){
             $benchmarkTimeStar = microtime(1);
             $data = $args;
