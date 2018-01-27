@@ -14,9 +14,9 @@
             return $query->result();
         }
 
-        public function user_data($user_id_pk)
+        public function user_data($user_email)
         {
-            $query = $this->db->get_where('user_master',array('is_active' => '1', 'user_id_pk' => $user_id_pk));
+            $query = $this->db->get_where('user_master',array('is_active' => '1', 'email' => $user_email));
             return $query->result();
         }
 

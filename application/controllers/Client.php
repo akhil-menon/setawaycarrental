@@ -61,9 +61,9 @@
             $benchmarkTimeStar = microtime(1);
             $data = $args;
             if ($data == null) {
-                $data['user_id_pk'] = $this->input->get('user_id_pk');
+                $data['email'] = $this->input->get('email');
             }
-            $user = $this->User_model->user_data($data['user_id_pk']);
+            $user = $this->User_model->user_data($data['email']);
             if (count($user) > 0) {
                 $res['msg'] = "Success";
             } else {
@@ -72,17 +72,17 @@
             $res['data'] = $user;
             $benchmarkTimeEnd = microtime(1);
             $res['timespan'] = round(1000 * ($benchmarkTimeEnd - $benchmarkTimeStar), 4) . "ms";
-            echo json_encode($user[0]->{'email'});
+            echo json_encode($user[0]->{'user_id_pk'});
         }
         public function reset_password($args = array()) {
             $benchmarkTimeStar = microtime(1);
             $data = $args;
             if ($data == null) {
-                $data['user_id_pk'] = $this->input->post('user_id_pk');
-                $data['password'] = $this->input->post('password');
+                $data['user_id_fk'] = $this->input->get('user_id_fk');
+                $data['password'] = $this->input->get('password');
             }
     
-            $user = $this->User_model->resetpassword($data['user_id_pk'], $data['password']);
+            $user = $this->User_model->resetpassword($data['user_id_fk'], $data['password']);
             if (count($user) > 0) {
                 $res['msg'] = "Password Changed";
             }
